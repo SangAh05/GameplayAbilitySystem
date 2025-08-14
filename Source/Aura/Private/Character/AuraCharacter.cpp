@@ -3,9 +3,10 @@
 
 #include "Character/AuraCharacter.h"
 
+
+#include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/AuraPlayerState.h"
-#include "../../../../Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Public/AbilitySystemComponent.h"
 
 AAuraCharacter::AAuraCharacter()
 {
@@ -17,7 +18,6 @@ AAuraCharacter::AAuraCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll  = false;
 	bUseControllerRotationYaw   = false;
-	
 }
 
 void AAuraCharacter::PossessedBy(AController* NewController)
@@ -26,7 +26,6 @@ void AAuraCharacter::PossessedBy(AController* NewController)
 
 	// Init ability actor info for the Server
 	InitAbilityActorInfo();
-
 }
 
 void AAuraCharacter::OnRep_PlayerState()
