@@ -19,9 +19,6 @@ AAuraEffectActor::AAuraEffectActor()
 	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere"); 
 
 	Sphere->SetupAttachment(GetRootComponent());
-
-
-
 }
 
 void AAuraEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -38,7 +35,9 @@ void AAuraEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 		
 		// const_cast를 통해서 속성을 바꾸는 작업 
 		UAuraAttributeSet* MutableAuraAttributeSet = const_cast<UAuraAttributeSet*>(AuraAttributeSet); // 가변 오라 속성세트
-		MutableAuraAttributeSet->SetHealth(AuraAttributeSet->GetHealth() + 25.f); // const이기 떄문에 오류가 생길 것인데 이것은 하면 안되는 행동이지만 배우기 위해 잠시 할 거라고한다. 가변 속성세트를 만들어서 하도록한다.
+		MutableAuraAttributeSet->SetHealth(AuraAttributeSet->GetHealth() + 25.0f); // const이기 떄문에 오류가 생길 것인데 이것은 하면 안되는 행동이지만 배우기 위해 잠시 할 거라고한다. 가변 속성세트를 만들어서 하도록한다.
+		MutableAuraAttributeSet->SetMana(AuraAttributeSet->GetMana() - 25.0f);
+		
 		Destroy(); // 오버랩이 되었으니까 해당 메쉬를 지워주겠다. 
 	}
 }
