@@ -12,7 +12,7 @@ UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetCont
 	{
 		OverlayWidgetContoller = NewObject<UOverlayWidgetController>(this, OverlayWidgetContollerClass);
 		OverlayWidgetContoller->SetWidgetControllerParams(WCPParams);
-
+		OverlayWidgetContoller->BindCallbacksToTependencies();
 		return OverlayWidgetContoller;
 	}
 
@@ -34,7 +34,9 @@ void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyst
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WdigetControllerParams); 
 
 	// 셋 함수를 호출하여 두가지를 함께 묶어두기
-	OverlayWidget->SetWidgetController(WidgetController);
+	OverlayWidget->SetWidgetController(WidgetController); // 블루프린트에서 엑세스할 수 있다. 
+	WidgetController->BroadcastInitialValues();
+
 
 	Widget->AddToViewport();
 }
