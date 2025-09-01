@@ -8,6 +8,8 @@
 
 class USphereComponent;
 
+class UGameplayEffect; 
+
 UCLASS()
 class AURA_API AAuraEffectActor : public AActor
 {
@@ -16,25 +18,32 @@ class AURA_API AAuraEffectActor : public AActor
 public:	
 	AAuraEffectActor();
 
-	UFUNCTION()
+	/*UFUNCTION()
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent,
 							AActor* OtherActor, UPrimitiveComponent* OtherComp,
-							int32 OtherBodyIndex, bool bFromSweep, 
+							int32 OtherBodyIndex, bool bFromSweep,
 							const FHitResult& SweepResult);
 
 	UFUNCTION()
 	virtual void EndOverlap(UPrimitiveComponent* OverlappedComponent,
-							AActor* OtherActor, UPrimitiveComponent* OtherComp, 
-							int32 OtherBodyIndex);
+							AActor* OtherActor, UPrimitiveComponent* OtherComp,
+							int32 OtherBodyIndex);*/ /* 블루프린트에서 구현하기 위해 영상에서는 지움 */
 
 protected:
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable)
+	void ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass);
+
+	UPROPERTY(EditAnywhere, Category = "Applied Effects")
+	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
+
+
 private:
-	UPROPERTY(VisibleAnywhere)
+	/*UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USphereComponent> Sphere;
 
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UStaticMeshComponent> Mesh;
+	TObjectPtr<UStaticMeshComponent> Mesh;*/ // 블루프린트에서 구현하기 위해 영상에서는 지움
 
 };
